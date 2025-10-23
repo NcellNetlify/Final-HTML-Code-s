@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Ncell "सधैं ON"</title>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; img-src 'self' data: https://i.imgur.com; connect-src 'self';">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --dark-purple: #4b0082;
+            --white-bg: #ffffff;
+            --gold-accent: #FFD700;
+            --text-dark: #333333;
+            --facebook-blue: #3b5998;
+            --twitter-blue: #00acee;
+            --instagram-pink: #E1306C;
+            --whatsapp-green: #25D366;
+            --youtube-red: #FF0000;
+            --error-red-color: #dc3545;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: var(--text-dark);
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+            font-size: 70%;
+            position: relative;
+            overflow: hidden;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            transition: filter 0.3s ease-in-out;
+        }
+
+        body.blurred {
+            filter: blur(5px);
+        }
+
+        video#anti-screenshot-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        @keyframes backgroundFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .blurred-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--dark-purple), var(--white-bg));
+            filter: blur(8px);
+            z-index: -1;
+            transform: scale(1.05);
+            animation: backgroundFadeIn 1s ease-out forwards;
+        }
+
+        .ticket-container {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 15px 20px;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 350px;
+            animation: fadeInContainer 1s ease-out forwards;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        @keyframes fadeInContainer {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- LOGO STYLING --- */
+        .top-logo-container { 
+            text-align: center; 
+            padding: 0px 0 0px 0; 
+            margin-bottom: 5px; 
+            margin-top: 0px; 
+        }
+        .top-logo-container img { 
+            max-width: 95px; 
+            height: auto; 
+            object-fit: contain; 
+            border-radius: 0; 
+            box-shadow: none; 
+            display: block; 
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* --- TAGLINE (REMAINS LARGE) --- */
+        .tagline {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.0em;
+            font-weight: 900;
+            color: var(--dark-purple);
+            margin-top: 20px; 
+            margin-bottom: 0px;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+            letter-spacing: 1px;
+            display: block;
+        }
+
+        /* --- H1 FONT SIZE --- */
+        .ticket-container h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5em; 
+            font-weight: 900;
+            color: var(--dark-purple);
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+            letter-spacing: 0.5px;
+        }
+
+        /* --- PARAGRAPH FONT SIZE --- */
+        #mainParagraph {
+            font-size: 1.5em; 
+            margin-bottom: 10px;
+            line-height: 1.5;
+            color: black;
+            font-weight: bold;
+        }
+
+        .ticket-input {
+            padding: 12px 20px;
+            border: 2px solid var(--dark-purple);
+            border-radius: 8px;
+            font-size: 1.0em;
+            text-align: center;
+            width: calc(100% - 44px);
+            max-width: 200px;
+            margin-bottom: 10px;
+            outline: none;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .ticket-input::placeholder {
+            color: #aaa;
+            font-weight: 400;
+        }
+
+        .ticket-input:focus {
+            border-color: #6a1b9a;
+            box-shadow: 0 0 10px rgba(75, 0, 130, 0.4);
+        }
+
+        .error-message {
+            color: var(--error-red-color);
+            font-size: 0.95em;
+            font-weight: 700;
+            margin-top: -5px;
+            margin-bottom: 15px;
+            display: none;
+            animation: fadeInError 0.3s ease-out;
+        }
+
+        @keyframes fadeInError {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .verify-button {
+            background-color: var(--dark-purple);
+            color: var(--white-bg);
+            padding: 15px 30px;
+            font-size: 1.2em;
+            font-weight: 700;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 20px;
+        }
+
+        .verify-button:hover {
+            background-color: #5c0099;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .social-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-buttons a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            color: var(--white-bg);
+            font-size: 1.5em;
+            text-decoration: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.60);
+            transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .social-buttons a:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        .social-buttons .fa-facebook-f { color: var(--facebook-blue); }
+        .social-buttons .fa-facebook-f:hover { text-shadow: 0 0 8px var(--facebook-blue); }
+
+        .social-buttons .fa-twitter { color: var(--twitter-blue); }
+        .social-buttons .fa-twitter:hover { text-shadow: 0 0 8px var(--twitter-blue); }
+
+        .social-buttons .fa-instagram { color: var(--instagram-pink); }
+        .social-buttons .fa-instagram:hover { text-shadow: 0 0 8px var(--instagram-pink); }
+
+        .social-buttons .fa-youtube { color: var(--youtube-red); }
+        .social-buttons .fa-youtube:hover { text-shadow: 0 0 8px var(--youtube-red); }
+
+        /* --- SUCCESS MESSAGE FONT SIZE DECREASED --- */
+        .success-message {
+            display: none;
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #e6ffe6;
+            border: 2px solid #00a000;
+            border-radius: 8px;
+            color: #006400;
+            font-size: 0.85em; /* D. Size: Changed from 1.3em to 1.1em */
+            font-weight: normal;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .copyright-container {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 15px 15px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 350px;
+            color: #333333;
+            text-align: center;
+            line-height: 1.5;
+            margin: 20px auto;
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            animation: fadeInContainer 1s ease-out forwards;
+        }
+
+        .copyright-container p {
+            margin: 0;
+            padding: 2px 0;
+            font-weight: normal;
+            font-size: 1.0em;
+        }
+
+        @media (max-width: 480px) {
+            .ticket-container {
+                padding: 15px 20px;
+                max-width: 320px;
+            }
+            .top-logo-container img { max-width: 95px; } 
+            
+            .tagline {
+                font-size: 2.2em; 
+                margin-top: 15px; 
+            }
+            .ticket-container h1 {
+                font-size: 1.2em;
+                font-weight: 900;
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
+            }
+            #mainParagraph {
+                font-size: 1.1em; 
+            }
+            .ticket-input {
+                font-size: 1em;
+                padding: 10px 15px;
+            }
+            .verify-button {
+                font-size: 1.1em;
+                padding: 12px 25px;
+            }
+            .social-buttons {
+                gap: 10px;
+            }
+            .social-buttons a {
+                width: 45px;
+                height: 45px;
+                font-size: 2.0em;
+            }
+            /* --- SUCCESS MESSAGE FONT SIZE DECREASED FOR MOBILE --- */
+            .success-message {
+                font-size: 0.90em; /* M. Size: Changed from 1.1em to 0.90em */
+                padding: 15px;
+            }
+            .copyright-container {
+                padding: 18px 10px;
+                max-width: 320px;
+            }
+            .copyright-container p {
+                font-size: 1.0em;
+            }
+        }
+    </style>
+</head>
+<body oncontextmenu="return false;" oncopy="return false;" oncut="return false;" onselectstart="return false;">
+    <video id="anti-screenshot-video" autoplay muted loop playsinline></video>
+
+    <div class="blurred-background"></div>
+
+    <div class="ticket-container">
+        <div class="top-logo-container">
+            <img src="https://i.imgur.com/rOD3i2w.png" alt="Ncell Logo" title="Ncell Logo" width="95" height="50">
+        </div>
+        
+        <div class="tagline">"Ncell सधैं ON"</div>
+        
+        <p id="mainParagraph">
+            Ncell "सधैं ON" Campaign मा स्वागत छ।
+        </p>
+
+        <h1 id="mainTitle">कृपया, आफ्नो टिकट नम्बर तल प्रविष्ट गर्नुहोस्।</h1>
+        
+        
+        <input type="text" id="ticketInput" class="ticket-input" placeholder="Ticket No:" autocomplete="off">
+        <p id="errorMessage" class="error-message"></p>
+        <button class="verify-button" id="verifyButton" onclick="verifyTicket()">प्रवेश गर्नुहोस् ।</button>
+
+        <div id="successMessage" class="success-message">
+            तपाईंको टिकट सफलतापूर्वक प्रमाणीकरण गरिएको छ ! धन्यवाद।
+            <br><br>
+            ("Your ticket has been successfully verified! Thank you.")
+        </div>
+
+
+        <div class="social-buttons">
+            
+            
+            <a href="https://www.facebook.com/Ncell" title="Ncell Facebook" target="_blank" rel="noreferrer noopener">
+                <i class="fab fa-facebook-f"></i>
+                
+                
+            </a>
+          <a
+            href="https://twitter.com/ncell" title="Ncell Twitter" target="_blank" rel="noreferrer noopener">
+                <i class="fab fa-twitter"></i> 
+            </a>
+            <a href="https://www.instagram.com/ncell/" title="Ncell Instagram" target="_blank" rel="noreferrer noopener">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://www.youtube.com/Ncell" title="Ncell YouTube" target="_blank" rel="noreferrer noopener">
+                <i class="fab fa-youtube"></i>
+            </a>
+            
+        </div>
+    </div>
+
+    <div class="copyright-container">
+        <p>© 2025 Ncell Axiata Limited</p>
+        <p>ISO 27001:2022 & ISO 27701:2019 Certified</p>
+    </div>
+
+    <script>
+        function verifyTicket() {
+            const enteredTicket = document.getElementById('ticketInput').value.trim();
+            const validTickets = ['N0C1E1L9L'];
+            const errorMessageElement = document.getElementById('errorMessage');
+
+            const isTicketValid = validTickets.includes(enteredTicket);
+
+            if (isTicketValid) {
+                document.getElementById('ticketInput').style.display = 'none';
+                document.getElementById('verifyButton').style.display = 'none';
+                document.getElementById('mainParagraph').style.display = 'none';
+                errorMessageElement.style.display = 'none';
+                document.getElementById('mainTitle').textContent = 'Ncell "सधैं ON" Campaign';
+
+                const successMessage = document.getElementById('successMessage');
+                successMessage.style.display = 'block';
+
+                document.querySelector('.social-buttons').style.display = 'flex';
+                
+                setTimeout(() => {
+                    window.location.replace('https://ncell.netlify.app/');
+                }, 3000);
+
+            } else {
+                errorMessageElement.textContent = 'टिकट नम्बर मिलेन, कृपया पुनः प्रयास गर्नुहोस्।';
+                errorMessageElement.style.display = 'block';
+
+                document.getElementById('ticketInput').value = '';
+                document.getElementById('ticketInput').focus();
+            }
+        }
+
+        document.getElementById('ticketInput').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                verifyTicket();
+            }
+        });
+
+        const bodyElement = document.body;
+
+        window.addEventListener('blur', () => {
+            bodyElement.classList.add('blurred');
+        });
+
+        window.addEventListener('focus', () => {
+            bodyElement.classList.remove('blurred');
+        });
+
+        if (window.self !== window.top) {
+            window.top.location = window.self.location;
+        }
+
+        const antiScreenshotVideo = document.getElementById('anti-screenshot-video');
+        if (antiScreenshotVideo) {
+            
+            if (!antiScreenshotVideo.srcObject) {
+                const canvas = document.createElement('canvas');
+                canvas.width = 1;
+                canvas.height = 1;
+                const ctx = canvas.getContext('2d');
+                ctx.fillRect(0, 0, 1, 1);
+                
+                if (canvas.captureStream) {
+                    const canvasStream = canvas.captureStream(10);
+                    antiScreenshotVideo.srcObject = canvasStream;
+                } else if (antiScreenshotVideo.captureStream) {
+                    antiScreenshotVideo.srcObject = antiScreenshotVideo.captureStream();
+                }
+            }
+
+            antiScreenshotVideo.play().catch(e => console.error("Video play failed:", e));
+
+            document.addEventListener('visibilitychange', () => {
+                if (document.hidden) {
+                    antiScreenshotVideo.pause();
+                } else {
+                    antiScreenshotVideo.play().catch(e => console.error("Video play failed on visibility change:", e));
+                }
+            });
+        }
+    </script>
+</body>
+</html>

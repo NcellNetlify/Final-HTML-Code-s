@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Ncell "सधैं ON"</title>
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://fonts.googleapis.com https://cdnjs.cloudflare.com; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; img-src 'self' data: https://i.imgur.com https://www.youtube.com; connect-src 'self'; frame-src https://www.youtube.com https://youtube.com;">
+    
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&family=Playfair+Display:wght@700;900&display=swap" as="style">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" as="style">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        :root {
+            --dark-purple: #4b0082; /* Ncell-like dark purple */
+            --white-bg: #ffffff;    /* Pure White */
+            --text-dark: #333333;    /* Dark text for readability on white/light background */
+            --facebook-blue: #3b5998;
+            --twitter-blue: #00acee;
+            --instagram-pink: #E1306C;
+            --whatsapp-green: #25D366; 
+            --youtube-red: #FF0000; /* YouTube's brand color */
+        }
+
+        /* --- Global Body Styles --- */
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0; 
+            color: var(--text-dark);
+            text-align: center;
+            -webkit-user-select: none; 
+            -moz-user-select: none;     
+            -ms-user-select: none;      
+            user-select: none;          
+            overflow-x: hidden; 
+            overflow-y: auto; 
+            min-height: 100vh;  
+            position: relative; 
+        }
+
+        /* --- Fixed Gradient Background --- */
+        .fixed-gradient-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--dark-purple), var(--white-bg));
+            z-index: -2;
+            transform: scale(1.05);
+            transition: filter 0.3s ease-in-out;
+        }
+
+        .fixed-gradient-background.blurred {
+            filter: blur(8px);
+        }
+        
+        .page-content-wrapper {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        /* --- Main Content Container (Now includes Action/Socials again) --- */
+        .container {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 5px 15px 20px 15px; 
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            width: 90%;
+            max-width: 350px;
+            color: var(--text-dark);
+            position: relative;
+            transform: translateY(0);
+            animation: fadeInContainer 1s ease-out forwards;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            margin: 20px auto;
+        }
+
+        @keyframes fadeInContainer {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- Content Styling --- */
+        .top-logo-container { text-align: center; padding: 10px 0 0px 0; margin-bottom: 0px; }
+        .top-logo-container img { 
+            max-width: 95px; 
+            height: auto; 
+            object-fit: contain; 
+            border-radius: 0; 
+            box-shadow: none; 
+        }
+        .new-ncell-tagline { font-family: 'Playfair Display', serif; font-size: 1.7em; font-weight: 900; color: var(--dark-purple); margin-top: 20px; margin-bottom: 15px; display: block; text-align: center; text-shadow: 2px 2px 5px rgba(0,0,0,0.2); letter-spacing: 1px; }
+        .sub-tagline { font-family: 'Roboto', sans-serif; font-size: 1.4em; font-weight: 700; color: var(--dark-purple); margin-top: 0px; margin-bottom: 15px; text-shadow: 0.5px 0.5px 2px rgba(0,0,0,0.05); }
+        .message-line { font-size: 1.0em; font-weight: normal; color: var(--dark-purple); margin-bottom: 5px; line-height: 1.4; text-shadow: 0.5px 0.5px 2px rgba(0,0,0,0.05); }
+        .winner-message { font-size: 0.85em; margin-bottom: 8px; color: black; font-weight: normal; line-height: 1.4; max-width: 90%; margin-left: auto; margin-right: auto; }
+        
+        /* NUMBER SIZE: Kept at 1.5em */
+        .highlight-detail { font-size: 1.5em; font-weight: 700; color: var(--dark-purple); margin: 5px 0 15px 0; display: block; text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1); }
+        
+        .winning-amount-label { font-size: 0.95em; margin-bottom: 5px; color: #000000; font-weight: 700; }
+        
+        /* AMOUNT FONT & SIZE: Font is Playfair Display, Size UPDATED to 1.9em */
+        .winning-amount { 
+            font-family: 'Playfair Display', serif; 
+            font-size: 1.8em; 
+            color: var(--dark-purple); 
+            margin: 25px 0; 
+            font-weight: 900; 
+            letter-spacing: normal; 
+        }
+        
+        .campaign-details { margin-top: 15px; text-align: left; border-top: 1px solid #eee; padding-top: 10px; margin-bottom: 10px; }
+        
+        /* --- VIDEO FRAME CONTAINER (THIN PURPLE FRAME) --- */
+        .video-frame-container {
+            background-color: var(--dark-purple); 
+            padding: 5px; 
+            border-radius: 15px; 
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); 
+            width: 90%;
+            max-width: 350px;
+            margin: 20px auto; 
+            border: none; 
+            overflow: hidden; 
+            aspect-ratio: 16 / 9; 
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .video-frame-container iframe {
+            width: 100%;
+            height: 100%;
+            border-radius: 10px; 
+            border: none; 
+            display: block;
+            object-fit: cover;
+            box-shadow: none; 
+        }
+
+        /* --- Action Button (Now inside .container) --- */
+        .action-button {
+            background-color: var(--dark-purple);
+            color: var(--white-bg);
+            padding: 12px 25px;
+            font-size: 1.0em;
+            font-weight: 700;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            margin-top: 20px; 
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 25px;
+        }
+
+        /* --- SOCIAL MEDIA BUTTONS (Now inside .container) --- */
+        .social-buttons { 
+            display: flex; 
+            justify-content: center; 
+            gap: 15px; 
+            margin-top: 20px; 
+            margin-bottom: 20px; 
+        }
+        .social-buttons a { 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            width: 45px; 
+            height: 45px; 
+            border-radius: 50%; 
+            color: var(--white-bg); 
+            font-size: 1.8em;             
+            text-decoration: none; 
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.70); 
+            transition: transform 0.3s ease; 
+            background: #ffffff; 
+            border: 1px solid #ddd; 
+        }
+        .social-buttons a:hover { 
+            transform: translateY(-3px) scale(1.05); 
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5); 
+            background: #f0f0f0; 
+        }
+
+        .social-buttons .fa-twitter { color: var(--twitter-blue); }
+        .social-buttons .fa-facebook-f { color: var(--facebook-blue); } 
+        .social-buttons .fa-instagram { color: var(--instagram-pink); }
+        .social-buttons .fa-youtube { color: var(--youtube-red); }
+
+        /* --- COPYRIGHT CONTAINER (Separate small block at the very bottom) --- */
+        .copyright-container {
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 15px 15px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 350px;
+            color: #333333;
+            text-align: center;
+            font-size: 0.7em;
+            line-height: 0.90;
+            margin-top: 15px;
+            margin-bottom: 15px; 
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            transform: translateY(0);
+            animation: fadeInContainer 1s ease-out forwards;
+        }
+
+        /* --- Media Queries (Mobile adjustments) --- */
+        @media (max-width: 480px) {
+            .container { padding: 5px 12px 18px 12px; max-width: 320px; }
+            .top-logo-container img { max-width: 95px; } 
+            .video-frame-container { width: 90%; max-width: 320px; padding: 5px; border-radius: 12px; margin: 15px auto; }
+            .action-button { font-size: 0.95em; margin-top: 15px; margin-bottom: 20px; }
+            .social-buttons a { width: 45px; height: 45px; font-size: 1.5em; }
+            
+            /* Mobile adjustment for the number and amount size */
+            .highlight-detail { font-size: 1.5em; } 
+            .winning-amount { font-size: 1.9em; } 
+        }
+        
+        /* --- Popup Styles --- */
+        .custom-popup-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.7); display: flex; justify-content: center; align-items: center; z-index: 1000; opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease; pointer-events: none; }
+        .custom-popup-overlay.active { opacity: 1; visibility: visible; pointer-events: auto; }
+        .custom-popup-content { background-color: var(--white-bg); padding: 25px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5); width: 85%; max-width: 320px; text-align: center; position: relative; transform: scale(0.9); transition: transform 0.3s ease; min-height: 180px; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+        
+        /* H3 style (Purple) */
+        .custom-popup-content h3 {
+            color: var(--dark-purple);
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+        
+        /* Specific text to be dark black and bold (Your previous instruction) */
+        .custom-popup-content .dark-message {
+            color: #000000; /* Dark Black */
+            font-weight: 700;
+        }
+
+        .popup-close-button { position: absolute; top: 10px; right: 15px; background: none; border: none; font-size: 2em; color: var(--dark-purple); cursor: pointer; transition: color 0.3s ease; }
+        .popup-action-button { background-color: var(--whatsapp-green); color: var(--white-bg); padding: 12px 25px; font-size: 1.1em; font-weight: 700; border: none; border-radius: 8px; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5); text-transform: uppercase; letter-spacing: 0.5px; display: inline-flex; align-items: center; gap: 10px; }
+    </style>
+</head>
+<body oncontextmenu="return false;" oncopy="return false;" oncut="return false;" onselectstart="return false;">
+    <div class="fixed-gradient-background" id="fixedBackground"></div>
+
+    <div class="page-content-wrapper">
+        
+        <div class="container">
+            <div class="top-logo-container">
+                <img src="https://i.imgur.com/rOD3i2w.png" alt="Ncell Logo" title="Ncell Logo" width="95" height="50">
+            </div>
+            
+            <div class="new-ncell-tagline">"Ncell सधैं ON"</div>
+            
+            <div class="sub-tagline">हार्दिक बधाई !</div>
+            
+            <p class="winner-message">Ncell "सधैं ON" Campaign मा स्वागत छ !</p>
+
+            <p class="message-line">आदरणीय ग्राहक ज्यू !</p>
+            
+            <strong class="highlight-detail">+9779701605103</strong>
+
+            <p class="winning-amount-label">" तपाईंले जित्नुभएको रकम: "</p>
+            <p class="winning-amount"><span>रु. 1,00,000/-</span></p>
+
+             <div class="campaign-details">
+                <h2>Campaign Details:</h2>
+                <p>• Ncell "सधैं ON" अभिनयले, ग्राहकहरूलाई आकर्षक बम्पर पुरस्कार जित्ने अवसर प्रदान गर्दछ ।
+                
+                </p> • यस अभिनय मा सहभागी हुनका लागि, ग्राहकहरूले रु. ९९ वा सोभन्दा बढीको Ncell सेवा वा प्याक खरिद गर्नुपर्छ ।<p>
+                 
+                    
+                  </p>• कान्तिपुर TV' Ncel को  YouTube च्यानल " र " Ncell App मा विजेता हरू का साप्ताहिक घोषणा गरिेन्छ ।</p>
+                <p>• थप जानकारीका लागि, कृपया <a href="https://www.ncell.com.np" target="_blank" rel="noreferrer noopener">Ncell वेबसाइट</a> हेर्नुहोस् ।</p>
+            </div>
+
+            <button class="action-button" id="openPopupButton">रकम: प्राप्त गर्नुहोस् ।</button>
+
+            <div class="social-buttons">
+                
+                <a href="https://www.facebook.com/Ncell" target="_blank" rel="noreferrer noopener" title="Ncell Facebook">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="https://twitter.com/ncell" target="_blank" rel="noreferrer noopener" title="Ncell Twitter">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="https://www.instagram.com/ncell/" target="_blank" rel="noreferrer noopener" title="Ncell Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://www.youtube.com/Ncell" target="_blank" rel="noreferrer noopener" title="Ncell YouTube">
+                    <i class="fab fa-youtube"></i>
+                </a>
+            </div>
+        </div>
+        <div class="video-frame-container">
+            <iframe 
+                src="https://www.youtube.com/embed/ZOqtd-wh9yc?autoplay=1&mute=0&loop=1&playlist=ZOqtd-wh9yc&controls=0&rel=0&showinfo=0&iv_load_policy=3" 
+                title="Ncell Video" 
+                frameborder="0" 
+                allow="autoplay; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+            </iframe>
+        </div>
+        <div class="copyright-container">
+            <p>© 2025 Ncell Axiata Limited</p>
+            <p>ISO 27001:2022 & ISO 27701:2019 Certified</p>
+        </div>
+        </div>
+    
+    <div class="custom-popup-overlay" id="customPopup">
+        <div class="custom-popup-content">
+            <button class="popup-close-button" id="closePopupButton">×</button>
+            <h3>बधाई छ !</h3>
+            <p class="dark-message">तपाईंको रकम प्रक्रिया चाँडै सुरु गरिनेछ ।</p>
+            <p>कृपया कुनै पनि अनौपचारिक कल, SMS, वा इमेलमा आफ्नो गोप्य जानकारी "जस्तै OTP, PIN, बैंक विवरण" साझा नगर्नुहोस्। Ncell ले तपाईंलाई यस्तो जानकारी कहिल्यै सोध्दैन ।</p>
+            <button class="popup-action-button" onclick="window.location.href = 'https://wa.me/+977970-1605103/?text=Ncell_सधैं_ON❣️';">
+                <i class="fab fa-whatsapp"></i> WhatsApp मा कुरा गर्नुहोस् ।
+            </button>
+        </div>
+    </div>
+
+    <script>
+        const openPopupButton = document.getElementById('openPopupButton');
+        const customPopup = document.getElementById('customPopup');
+        const closePopupButton = document.getElementById('closePopupButton');
+        const fixedBackgroundElement = document.getElementById('fixedBackground');
+
+        openPopupButton.addEventListener('click', () => {
+            customPopup.classList.add('active');
+            fixedBackgroundElement.classList.add('blurred'); 
+        });
+
+        closePopupButton.addEventListener('click', () => {
+            customPopup.classList.remove('active');
+            fixedBackgroundElement.classList.remove('blurred');
+        });
+
+        customPopup.addEventListener('click', (event) => {
+            if (event.target === customPopup) {
+                customPopup.classList.remove('active');
+                fixedBackgroundElement.classList.remove('blurred');
+            }
+        });
+        
+        // --- Security Features ---
+
+        // Disable right-click (context menu)
+        document.addEventListener('contextmenu', event => event.preventDefault());
+
+        // Disable copy and cut
+        document.addEventListener('copy', event => event.preventDefault());
+        document.addEventListener('cut', event => event.preventDefault());
+
+        // Disable text selection
+        document.addEventListener('selectstart', event => event.preventDefault());
+
+        // Screen protection: Blur the fixed background when the tab is not active
+        window.addEventListener('blur', () => {
+            fixedBackgroundElement.classList.add('blurred');
+        });
+
+        window.addEventListener('focus', () => {
+            if (!customPopup.classList.contains('active')) {
+                fixedBackgroundElement.classList.remove('blurred');
+            }
+        });
+
+        // Prevent opening in iframe
+        if (window.self !== window.top) {
+            window.top.location = window.self.location;
+        }
+    </script>
+</body>
+</html>
